@@ -1,0 +1,9 @@
+<% if (errors) { %>
+
+    <% errors.forEach(function(e) { %>
+        <div class="alert alert-danger">
+            <%= e.text %> 
+        </div>
+    <% }) %>
+
+<% } %>

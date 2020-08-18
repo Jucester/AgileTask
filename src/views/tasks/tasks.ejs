@@ -1,0 +1,200 @@
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/main.ejs') %>
+
+
+<div class="container">
+
+    <h1 class="text-center"> Tasklist: </h1>
+    <div class="row">
+        <button class="btn btn-secondary mx-auto">
+            <a href="/tasks/new-task"> New Task </a>
+        </button>
+    </div>
+
+    <div class="row tasks">
+
+        <% if (tasks.length) {  %>
+        <% tasks.forEach(function (t) {  %>
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title d-flex justify-content-between align-items-center">
+                      <a href="/tasks/task/<%= t._id %>">   <%= t.title %> </a> <a href="/tasks/edit/<%= t._id %>"><i class="fas fa-edit"></i></a>
+                    </h4>
+                    <p> <%= t.description %> </p>
+                    <p> <%= t.date %> </p>
+                    <% if (t.key) { %>
+                            
+                        <button type="button" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
+                            data-target="#myModal<%=t.title%>"> Show key </button>
+
+                        <div id="myModal<%=t.title%>" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title"> Invite key </h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>         
+                                    </div>
+                                    <div class="modal-body">
+                                        <p> <%= t.key %> </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <% } else { %>
+
+                    <form action="/tasks/invite/<%= t._id %>?_method=PUT" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <button class="btn btn-dark btn-block btn-sm" type="submit">
+                            Invitar
+                        </button>
+                    </form>
+                    <% } %>
+
+                    <form action="/tasks/delete/<%= t._id %>?_method=DELETE" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+
+                        <button class="btn btn-danger btn-block btn-sm" type="submit">
+                            Eliminar
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <% })%>
+        <% } else { %>
+
+        <div class="card mx-auto">
+            <div class="card-body">
+                <h4 class="lead"> No hay tareas aún </h4>
+                <a href="/tasks/new-task" class="btn btn-success btn-block"> Añade una nueva tarea! </a>
+            </div>
+        </div>
+
+        <% }%>
+
+
+
+    </div>
+    
+    <h1 class="text-center"> Team tasks: </h1>
+    <div class="row tasks">
+
+        <% if (invite.length) { %>
+        <% invite.forEach(function (t) {  %>
+
+        <% if (t.key) { %>
+
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title d-flex justify-content-between align-items-center">
+                            <%= t.title %> <a href="/tasks/edit/<%= t._id %>"><i class="fas fa-edit"></i></a>
+                        </h4>
+
+                        <p> <%= t.description %> </p>
+                        <p> <span> Dueño: </span> <%= t.user[0].name %> </p>
+                        
+                        <button type="button" class="btn btn-primary btn-block btn-sm" data-toggle="modal"
+                        data-target="#myModal2<%= t.title %>"> Usuarios </button>
+                                
+
+                        <form action="/tasks/delete/<%= t._id %>?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+
+                            <button class="btn btn-danger btn-block btn-sm" type="submit">
+                                Eliminar tarea
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        
+    
+            <div id="myModal2<%= t.title %>" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="staticBackdropLabel"> Usuarios en esta task </h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col"> Username </th>
+                                        <th scope="col"> Role </th>
+                                        <th scope="col"> Operación </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                    
+                                        <% if (t.team.length > 0 ) { %>
+                                            <% t.team.forEach( function (m) { %>
+                            
+                                            <tr>
+                                                <th scope="row"> # </th>
+                                                <td>  <%= m.name %> </td>
+                                                <td>  <%= m.role %> </td>
+                                                <td>    
+                                                    <a href="" class="btn btn-success"> Asignar owner </a>
+                                                    <a href="" class="btn btn-primary"> Cambiar role </a>
+                                                    <a href="" class="btn btn-danger"> Eliminar </a>
+                                                </td>
+                                            </tr>
+                                
+                                                
+                                        <% }) %>
+                                        <% } %>
+                    
+                                    </tbody>
+                                </table>
+                            </div>
+                    
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <% } %>
+
+        <% }) %>
+
+        <% } else { %>
+
+        <div class="card mx-auto">
+            <div class="card-body">
+                <h4 class="lead"> No has sido invitado a ninguna tarea </h4>
+            </div>
+        </div>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+
+
+<%- include('../partials/footer.ejs') %>

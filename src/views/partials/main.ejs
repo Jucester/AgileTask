@@ -1,0 +1,62 @@
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"> Tasks App </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <a class="nav-link" href="/about"> About </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                <% if (user) { %>
+                    
+                    <a class="nav-link" href="/tasks"> Tasks </a>
+                    <a class="nav-link" href="/tasks/profile">Profile</a>
+                    <a class="nav-link" href="/users/logout">Logout</a>
+
+                <% } else {  %>
+            
+                    <a class="nav-link" href="/users/singin">Sign In</a>
+                    <a class="nav-link" href="/users/singup">Sign Up</a>
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <div class="container mt-4">
+
+        <% if (singupMessage.length > 0) { %>
+            <div class="alert alert-warning">
+                <%= singupMessage %> 
+            </div>
+        <% } %>
+        
+        <% if (singinMessage.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= singinMessage %> 
+            </div>
+        <% } %>
+        
+        <% if (success.length > 0) { %>
+            <div class="alert alert-success">
+                <%= success %> 
+            </div>
+        <% } %>
+        
+        <% if (error.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= error %> 
+            </div>
+        <% } %>
+        
+            
+    </div>
+

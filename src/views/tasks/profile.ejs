@@ -1,0 +1,44 @@
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/main.ejs') %>
+
+<div class="container contenedor">
+    
+    <h1> Perfil </h1>
+
+    <div class="jumbotron">
+        <h3> Info de usuario: </h3>
+      
+        <ul>
+            <li> Correo: <%= user.email %> </li>
+            <li> id: <%= user.id %> </li>
+            <li> Username: <%= user.username %>  </li>
+            <li> Fecha de registro: <%= user.date%>  </li>
+            <li> Tareas pendientes: </li>
+            <li> Tareas completadas:</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header"> Invitation keys </h5>
+        <div class="card-body">
+          <h5 class="card-title"> ¿Algún amigo quiere trabajar contigo ? </h5>
+          <p class="card-text"> Añade la key aquí: </p>
+
+          <form action="/tasks/invite" method="POST">
+
+              <div class="form-group">
+                <input type="text" name="inviteKey" placeholder="key here..." class="form-control">
+              </div>
+
+              <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit"> Agregar </button>
+              </div>
+
+          </form>
+          
+        </div>
+      </div>
+</div>
+
+
+<%- include('../partials/footer.ejs') %>

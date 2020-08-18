@@ -1,0 +1,49 @@
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/main.ejs') %>
+
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-header">
+                <h5 class="card-title"> <%= task.title %> <a href="#"><i class="fas fa-edit"></i></a></h5>
+            </div>
+            <div class="card-body">
+    
+              <p class="card-text"> <%= task.description %> </p>
+              <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"> Tarea </th>
+                        <th scope="col"> Descripción</th>
+                        <th scope="col"> Operación </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+    
+                      
+            
+                            <tr>
+                                <th scope="row"> # </th>
+                                <td>  Task setep 1 </td>
+                                <td>  Task desc 1 </td>
+                                <td>    
+                                    <a href="" class="btn btn-success"> Finalizado </a>
+                                    <a href="" class="btn btn-primary"> Editar </a>
+                                    <a href="" class="btn btn-danger"> Eliminar </a>
+                                </td>
+                            </tr>
+                
+                                
+                    
+    
+                    </tbody>
+                </table>
+            </div>
+            </div>
+          </div>
+        
+    </div>
+
+
+<%- include('../partials/footer.ejs') %>

@@ -34,8 +34,8 @@ controller.renderNewTask = (req, res, next) => {
 };
 
 controller.newTask = async (req, res, next) => {
-  
-    const { title, description } = req.body;
+    console.log(req.body)
+    const { title, description, steps } = req.body;
     
     
     if(!title) {
@@ -54,7 +54,7 @@ controller.newTask = async (req, res, next) => {
     }
 
     else {
-        const newTasks = new Tasks({ title, description});
+        const newTasks = new Tasks({ title, description, steps });
         newTasks.user = { id: req.user.id, name: req.user.username };
         newTasks.team = { id: req.user.id, name: req.user.username, role: 'owner'}
         await newTasks.save();

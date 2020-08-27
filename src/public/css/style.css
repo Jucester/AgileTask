@@ -9,11 +9,17 @@ body {
 }
 
 a {
+    color: #fff;
     text-decoration: none;
 }
 
-a:visited {
-    color: rgb(65, 65, 65);
+a:hover {
+    text-decoration: none;
+    color: #dddddd;
+}
+
+.title:visited {
+    color: rgb(32, 32, 32);
 }
 
 ul {

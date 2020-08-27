@@ -26,6 +26,9 @@ const taskSchema = new Schema({
     key: {
         type: String
     },
+    steps: {
+        type: Array
+    },
     team: {
         type: Array
     }

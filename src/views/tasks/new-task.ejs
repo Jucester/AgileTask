@@ -1,45 +1,59 @@
 <%- include('../partials/head.ejs') %>
 <%- include('../partials/main.ejs') %>
 
-    <div class="contenedor">
-        <% if (errors) { %>
+<div class="contenedor">
+    <% if (errors) { %>
 
-            <% errors.forEach(function(e) { %>
-                <div class="alert alert-danger">
-                    <%= e.text %> 
-                </div>
-            <% }) %>
-        
-        <% } %>
-        
-
-        <div class="col-md-8 mx-auto">
-           <div class="card">
-               <div class="card-header">
-                   <h3> New Task: </h3>
-               </div>
-               <div class="card-body">
-                   <form action="/tasks/new-task" method="POST">
-                       <div class="form-group">
-                           <input type="text" name="title" class="form-control" placeholder="title" autofocus>
-                       </div>
-
-                       <div class="form-group">
-                            <textarea name="description" class="form-control" placeholder="description"></textarea>
-                        </div>
-
-                
-
-                        <div class="form-group">
-                            <button class="btn btn-primary mx-auto" type="submit"> Añadir </button>
-                        </div>
-
-                   </form>
-               </div>
-            </div>
-
-       </div>
+    <% errors.forEach(function(e) { %>
+    <div class="alert alert-danger">
+        <%= e.text %>
     </div>
+    <% }) %>
+
+    <% } %>
+
+
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center"> New Task: </h3>
+            </div>
+            <div class="card-body">
+                <form action="/tasks/new-task" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                    </div>
+
+                    <h4> Steps: </h4>
+                    <div class="list">
+                        <ul class="steps" id="steps">
+
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="step" id="step" placeholder="Enter the step...">
+                        <button type="button" class="btn btn-dark" id="add"> + </button>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button class="btn btn-primary mx-auto" type="submit"> Añadir </button>
+                    </div>
+
+
+                </form>
+
+               
+
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
 <%- include('../partials/footer.ejs') %>
